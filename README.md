@@ -2,7 +2,7 @@
 
 **Estudiante:** Nathali Abigail Chacón Murillo
 
-**Sistema publicado:** https://TU-SITIO.netlify.app ← *(cambiar por el enlace de Netlify)*
+**Sistema publicado:** https://protectovideojuegosdos.netlify.app/juegos
 
 Continuación del Proyecto 1 (mismo tema, mismas entidades y mismos frontends en Vue.js):
 
