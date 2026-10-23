@@ -1,0 +1,19 @@
+{
+  "name": "catalogo-videojuegos",
+  "version": "2.0.0",
+  "description": "Catálogo temático de videojuegos: API REST en Netlify Functions + MongoDB Atlas, autenticación JWT y frontend en Vue.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev",
+    "datos": "node --env-file=.env scripts/cargar-datos.mjs"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.10.0"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}

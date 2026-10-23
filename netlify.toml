@@ -1,0 +1,28 @@
+# =====================================================================
+#  Catálogo de Videojuegos — configuración de Netlify
+# =====================================================================
+
+[build]
+  # El frontend en Vue (HTML + JS) no necesita compilarse.
+  publish   = "public"
+  functions = "netlify/functions"
+  command   = "echo 'Sin paso de compilación'"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Las rutas /api/* se enlazan con cada función mediante `config.path`
+# dentro de netlify/functions/*.mjs:
+#   /api                 -> api.mjs
+#   /api/auth/*          -> auth.mjs
+#   /api/juegos/*        -> juegos.mjs
+#   /api/estudios/*      -> estudios.mjs
+#   /api/plataformas/*   -> plataformas.mjs
+#   /api/estadisticas    -> estadisticas.mjs
+# (Es el equivalente moderno de un [[redirects]] de /api/* hacia /.netlify/functions/*.)
+
+# IMPORTANTE: MONGODB_URI y JWT_SECRETO NO van aquí.
+# Se configuran en Netlify: Site configuration > Environment variables.

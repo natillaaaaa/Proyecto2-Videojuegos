@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Inicio de sesión del Catálogo de Videojuegos.">
+<title>Iniciar sesión · Catálogo de Videojuegos</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040504'/%3E%3Cpath d='M4 4h24v18l-8 8H4z' fill='%2376b900'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="envoltura cabecera__barra">
+    <a class="marca" href="/index.html">
+      <span class="marca__glifo">▶</span>
+      <span class="marca__texto">Catálogo<span>Videojuegos</span></span>
+    </a>
+    <button class="menu-boton" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    <nav class="nav">
+      <a href="index.html">Inicio</a>
+      <a href="juegos.html">Juegos</a>
+      <a href="estudios.html">Estudios</a>
+      <a href="plataformas.html">Plataformas</a>
+      <a href="/api" target="_blank" rel="noopener">API</a>
+    </nav>
+  </div>
+</header>
+
+<main id="app" class="envoltura acceso" v-cloak>
+  <form class="dialogo" @submit.prevent="enviar" novalidate>
+    <div class="dialogo__cabecera">
+      <div>
+        <p class="dialogo__sub">POST /api/auth/login</p>
+        <h1 class="dialogo__titulo">Iniciar sesión</h1>
+      </div>
+    </div>
+
+    <div class="dialogo__cuerpo">
+      <p class="aviso-sesion" v-if="motivo === 'expirada'">Tu sesión expiró. Vuelve a iniciar sesión para continuar.</p>
+      <p class="aviso-sesion" v-else-if="motivo === 'requerida'">Necesitas iniciar sesión para crear, editar o borrar registros.</p>
+
+      <div class="alerta" v-if="errores.length">
+        <strong>No se pudo iniciar sesión.</strong>
+        <ul><li v-for="(e, i) in errores" :key="i">{{ e }}</li></ul>
+      </div>
+
+      <div class="formulario">
+        <div>
+          <label class="etiqueta" for="correo">Correo</label>
+          <input id="correo" class="campo" type="email" v-model="correo" autocomplete="email" required autofocus>
+        </div>
+        <div>
+          <label class="etiqueta" for="contrasena">Contraseña</label>
+          <input id="contrasena" class="campo" type="password" v-model="contrasena" autocomplete="current-password" required>
+        </div>
+      </div>
+
+      <p class="acceso__pie">¿No tienes cuenta? <a :href="'/registro.html' + sufijo">Regístrate</a></p>
+    </div>
+
+    <div class="dialogo__pie">
+      <button class="boton boton--solido" type="submit" :disabled="enviando">
+        {{ enviando ? 'Entrando…' : 'Entrar' }}
+      </button>
+      <a class="boton boton--fantasma separa" :href="volver">Cancelar</a>
+    </div>
+  </form>
+</main>
+
+<footer class="pie">
+  <div class="envoltura pie__contenido">
+    <span>Autenticación con JWT</span>
+    <span>El token se guarda en este navegador hasta que cierres sesión o expire.</span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script>window.Vue || document.write('<script src="/js/vendor/vue.global.prod.js"><\/script>');</script>
+<script src="/js/comun.js"></script>
+<script src="/js/acceso.js"></script>
+<script>montarAcceso('login');</script>
+</body>
+</html>
